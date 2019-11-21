@@ -11,6 +11,9 @@ from .forms import UserRegisterForm
 # def dashboardView(request):
 #     return render(request, 'dashboard.html')
 
+def homeView(request):
+    return render(request, 'index.html')
+
 def registerView(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
