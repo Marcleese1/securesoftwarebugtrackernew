@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView
 from .forms import UserRegisterForm
 from django.contrib.auth import login, logout
 
+
 # Create your views here.
 
 # def indexView(request):
@@ -16,19 +17,19 @@ from django.contrib.auth import login, logout
 def homeView(request):
     return render(request, 'index.html')
 
-class signup(CreateView):
-    form_class = UserRegisterForm
-    template_name = 'registration/register.html'
-    success_url = reverse_lazy('login')
-# def registerView(request):
-#     if request.method == 'POST':
-#         form = UserRegisterForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             messages.success(request, f'Account created for {username}!')
-#             success_url = reverse_lazy('login')
-#     else:
-#         form = UserRegisterForm()
-#     return render(request, 'registration/register.html', {'form':form})
+# class signup(CreateView):
+#     form_class = UserRegisterForm
+#     template_name = 'registration/register.html'
+#     success_url = reverse_lazy('login')
+def registerView(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}!')
+
+    else:
+        form = UserRegisterForm()
+    return render(request, 'registration/login.html', {'form':form})
 
