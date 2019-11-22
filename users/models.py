@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 #from . import forms
 
+
 # Create your models here.
 class Manager(BaseUserManager):
     use_in_migrations = True
@@ -32,6 +33,7 @@ class Manager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True')
 
         return self._create_user(username,email, password, **extra_fields)
+
 
 class Users(AbstractUser):
     pass
