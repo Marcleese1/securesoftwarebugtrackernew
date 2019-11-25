@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!-- template/post_list.html -->
+{% extends 'base.html' %}
+{% load i18n %}
 
-</body>
-</html>
+
+{% block title %}Tickets{% endblock %}
+
+{% block content %}
+    <h1>Packages</h1>
+  {% for post in object_list %}
+    <div class="card">
+     <span class="font-weight-bold">{{ "Title: " }}{{ post.ticketName }}</span>
+      <div class="card-body">
+      <p>{{ "Issue: " }}{{ post.ticketDescription }}</p>
+      <p>{{ "time made: " }}{{ post.ticketTime }}</p>
+      <p>{{ "priority: " }}{{ post.priority }}</p>
+      <p>{{ "status: " }}{{ post.condition }}</p>
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'EditPackage' post.pk%}">|Edit Package|</a>
+      {% endif %}
+      </div>
+    </div>
+    <br />
+  {% endfor %}
+{% endblock content %}

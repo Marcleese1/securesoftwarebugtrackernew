@@ -14,8 +14,7 @@ from django.contrib.auth import login, logout
 # def dashboardView(request):
 #     return render(request, 'dashboard.html')
 
-def homeView(request):
-    return render(request, 'index.html')
+
 
 # class signup(CreateView):
 #     form_class = UserRegisterForm

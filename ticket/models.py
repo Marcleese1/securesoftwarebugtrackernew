@@ -21,4 +21,4 @@ class Ticket(models.Model):
     ticketDescription = models.TextField(max_length=10000)
     ticketTime = models.DateTimeField(default = timezone.now)
     condition = enum.EnumField(Condition, default = Condition.open)
-    
+    priority = models.CharField(max_length=500)
