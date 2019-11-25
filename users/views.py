@@ -6,6 +6,7 @@ from .forms import UserRegisterForm
 from django.contrib.auth import login, logout
 
 
+
 # Create your views here.
 
 # def indexView(request):

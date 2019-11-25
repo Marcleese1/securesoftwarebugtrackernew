@@ -4,6 +4,6 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from ticket import models
 
-class homeView(ListView):
+class dashView(ListView):
     model = models.Ticket
     template_name = 'dashboard.html'
