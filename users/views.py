@@ -20,3 +20,8 @@ def registerView(request):
         form = UserRegisterForm()
     return render(request, 'registration/login.html', {'form': form})
 
+
+def logoutView(request):
+    logout(request)
+    return redirect('login')
+
