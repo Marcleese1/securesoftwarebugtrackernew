@@ -15,11 +15,11 @@ priority= [
 
 
 
-class NewPackageForm(UserCreationForm):
+class createTicketForm(UserCreationForm):
     class Meta:
         model = Ticket
         fields = ('ticketName', 'ticketDescription', 'ticketTime', 'staffmember', 'condition', 'priority ')
 
     def __init__(self, *args, **kwargs):
-        super(NewPackageForm, self).__init__(*args, **kwargs)
-        self.fields['departureDate'].widget = widgets.AdminDateWidget()
+        super(createTicketForm, self).__init__(*args, **kwargs)
+        self.fields['ticketTime'].widget = widgets.AdminDateWidget()

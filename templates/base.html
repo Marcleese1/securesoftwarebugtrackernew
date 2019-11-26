@@ -12,9 +12,15 @@
   </head>
   <body>
       <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+      {% if user.is_authenticated %}
     <a class="navbar-brand" href="{% url 'dashboard' %}">Systems Bug Tracker</a>
+      {%else%}
+    <a class="navbar-brand" href="{% url 'login' %}">Systems Bug Tracker</a>
+      {%endif%}
     <ul class="navbar-nav mr-auto">
-    <li class="nav-item"><a href="{% url 'register' %}">+ New |</a></li>
+        {% if user.is_authenticated %}
+    <li class="nav-item"><a href="{% url 'createTicket' %}">New Ticket|</a></li>
+        {% endif %}
     </ul>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item"><a href="{% url 'register' %}">| All Packages</a></li>
@@ -36,18 +42,13 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'register' %}">Change Password</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'register' %}">Delete Account</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'register' %}">Log out</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'register'%}">View Bookings</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
               </div>
             </li>
           </ul>
         {% else %}
           <form class="form-inline ml-auto">
             <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log in</a>
-            <a href="{% url 'register' %}" class="btn btn-primary ml-2">Sign up</a>
           </form>
         {% endif %}
       </div>

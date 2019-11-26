@@ -20,5 +20,15 @@ class Ticket(models.Model):
     ticketName = models.CharField(max_length=200)
     ticketDescription = models.TextField(max_length=10000)
     ticketTime = models.DateTimeField(default = timezone.now)
-    condition = enum.EnumField(Condition, default = Condition.open)
+    condition = enum.EnumField(Condition, default=Condition.open)
     priority = models.CharField(max_length=500)
+
+
+class Comment(models.Model):
+    id = models.AutoField(primary_key=True, unique=True, auto_created=True)
+    ticketId = models.ForeignKey('Ticket', verbose_name='Ticket', on_delete=models.CASCADE, default=True,
+                                 related_name='ticket')
+    userId = models.ForeignKey('users.Users',  verbose_name='Users', on_delete=models.CASCADE, default=True,
+                               related_name='comment')
+    timestamp = models.DateTimeField(default=timezone.now)
+    description = models.CharField(max_length=1000)
