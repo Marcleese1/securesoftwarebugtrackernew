@@ -6,21 +6,8 @@ from .forms import UserRegisterForm
 from django.contrib.auth import login, logout
 
 
+
 # Create your views here.
-
-# def indexView(request):
-#     return render(request, 'index.html')
-#
-# def dashboardView(request):
-#     return render(request, 'dashboard.html')
-
-def homeView(request):
-    return render(request, 'index.html')
-
-# class signup(CreateView):
-#     form_class = UserRegisterForm
-#     template_name = 'registration/register.html'
-#     success_url = reverse_lazy('login')
 def registerView(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -31,5 +18,10 @@ def registerView(request):
 
     else:
         form = UserRegisterForm()
-    return render(request, 'registration/login.html', {'form':form})
+    return render(request, 'registration/login.html', {'form': form})
+
+
+def logoutView(request):
+    logout(request)
+    return redirect('login')
 

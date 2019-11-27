@@ -5,9 +5,9 @@ from users.models import Users
 
 
 Roles= [
-    ('test1', 'Test1'),
-    ('test2', 'Test2'),
-    ('test3', 'Test3'),
+    (0, 'Developer'),
+    (1, 'Tester'),
+    (2, 'Production'),
     ]
 
 
