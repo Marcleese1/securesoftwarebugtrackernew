@@ -8,7 +8,9 @@
 {% block content %}
     <h1>Packages</h1>
   {% for post in object_list %}
-    <div class="card">
+      <div class="card">
+       <a href="{% url 'editTicket' post.pk%}">
+
      <span class="font-weight-bold">{{ "Title: " }}{{ post.ticketName }}</span>
       <div class="card-body">
       <p>{{ "Issue: " }}{{ post.ticketDescription }}</p>
@@ -19,7 +21,9 @@
       {% if request.user.is_authenticated %}
       {% endif %}
       </div>
+       </a>
     </div>
+
     <br />
   {% endfor %}
 {% endblock content %}

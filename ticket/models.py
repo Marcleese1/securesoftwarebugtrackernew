@@ -4,11 +4,16 @@ import uuid
 from django.utils import timezone
 from django_enumfield import enum
 
+Opened = 'Opened'
+Resolved = 'Resolved'
+Closed = 'Closed'
 
-class Condition(enum.Enum):
-    open = 0
-    resolved = 1
-    closed = 2
+
+Condition = (
+        (Opened, 'Opened'),
+        (Resolved, 'Resolved'),
+        (Closed, 'Closed'),
+    )
 
 
 # Create your models here.
@@ -20,8 +25,9 @@ class Ticket(models.Model):
     ticketName = models.CharField(max_length=200)
     ticketDescription = models.TextField(max_length=10000)
     ticketTime = models.DateTimeField(default=timezone.now)
-    condition = models.IntegerField(Condition, default=Condition.open)
+    condition = models.CharField(max_length=40, choices=Condition, default=Opened)
     priority = models.CharField(max_length=500)
+
 
 
 class Comment(models.Model):

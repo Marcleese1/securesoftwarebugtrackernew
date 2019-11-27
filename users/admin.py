@@ -3,13 +3,13 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import UserRegisterForm, UserCreationForm, CustomerCreationFormAdmin
+from .forms import UserRegisterForm, UserCreationForm
 from .models import Users
 
 class CustomUserAdmin(UserAdmin):
-    add_form = CustomerCreationFormAdmin
+    add_form = UserCreationForm
     form = UserRegisterForm
     model = Users
-    list_display = ['id','username', 'email', 'password1', 'password2', 'role']
+    list_display = ['id','username', 'role']
 
 admin.site.register(Users, CustomUserAdmin)
