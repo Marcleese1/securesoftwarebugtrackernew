@@ -35,12 +35,14 @@ class Manager(BaseUserManager):
         return self._create_user(username,email, password, **extra_fields)
 
 
+
+
+
 class Users(AbstractUser):
     pass
     id = models.AutoField(primary_key=True, unique=True, auto_created=True)
     username = models.CharField(blank=False, max_length=25, unique=True)
     email = models.EmailField(blank=False, unique=True)
-    role = models.CharField(max_length=500)
 
     objects = Manager()
 

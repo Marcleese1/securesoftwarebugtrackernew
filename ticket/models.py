@@ -15,6 +15,25 @@ Condition = (
         (Closed, 'Closed'),
     )
 
+low = 'Low'
+medium = 'Medium'
+high = 'High'
+priority= [
+    (low, 'Low'),
+    (medium, 'Medium'),
+    (high, 'High'),
+    ]
+
+developer = 'Developer'
+tester = 'Tester'
+production = 'Production'
+
+
+Roles = [
+    (developer, 'Developer'),
+    (tester, 'Tester'),
+    (production, 'Production'),
+    ]
 
 # Create your models here.
 class Ticket(models.Model):
@@ -25,8 +44,9 @@ class Ticket(models.Model):
     ticketName = models.CharField(max_length=200)
     ticketDescription = models.TextField(max_length=10000)
     ticketTime = models.DateTimeField(default=timezone.now)
+    role = models.CharField(max_length=40, choices=Roles, default=developer)
     condition = models.CharField(max_length=40, choices=Condition, default=Opened)
-    priority = models.CharField(max_length=500)
+    priority = models.CharField(max_length=40, choices=priority, default=low)
 
 
 

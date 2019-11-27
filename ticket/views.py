@@ -18,13 +18,13 @@ class dashView(ListView):
 class createTicketView(LoginRequiredMixin, CreateView):
     model = models.Ticket
     template_name = 'createTicket.html'
-    fields = ('ticketName', 'ticketDescription', 'condition', 'priority' )
+    fields = ('ticketName', 'ticketDescription', 'priority', 'role')
     success_url = reverse_lazy('dashboard')
 
 
 class EditTicketView(UpdateView, LoginRequiredMixin):
     model = models.Ticket
     template_name = 'editTicket.html'
-    fields = ['ticketName', 'ticketDescription', 'condition', 'priority']
+    fields = ['ticketName', 'ticketDescription', 'condition', 'priority', 'role']
     success_url = reverse_lazy('dashboard')
 
