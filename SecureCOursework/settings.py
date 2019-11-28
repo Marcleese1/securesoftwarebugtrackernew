@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'ticket.apps.TicketConfig',
+    'axes'
+
 ]
 
 MIDDLEWARE = [
@@ -50,10 +52,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'axes.middleware.AxesMiddleware'
 ]
 
 ROOT_URLCONF = 'SecureCOursework.urls'
+
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 TEMPLATES = [
     {
@@ -121,6 +131,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 300
+
+AXES_LOGIN_FAILURE_LIMIT=3
+AXES_COOLOFF_TIME= 120
+AXES_ONLY_USER_FAILURES=True
 
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'users.Users'

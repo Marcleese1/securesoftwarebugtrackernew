@@ -13,13 +13,12 @@ from users.models import Users
 
 
 
-
 class createTicketForm(UserCreationForm):
 
 
     class Meta:
         model = Ticket
-        fields = ('ticketName', 'ticketDescription', 'priority', '')
+        fields = ('ticketName', 'ticketDescription', 'priority')
 
     def __init__(self, *args, **kwargs):
         super(createTicketForm, self).__init__(*args, **kwargs)

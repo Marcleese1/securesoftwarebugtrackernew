@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}Package Details{% endblock %}
+{% block title %}Edit Ticket{% endblock %}
 
 {% block content %}
   <h1>Package Details</h1>
   <form method="POST">
     {% csrf_token %}
+      {% if request.user == object.staffmember %}
     {{ form.as_p }}
+      {% else %}
+          <span class="font-weight-bold">{{ "Title: " }}{{ object.ticketName }}</span>
+      <div class="card-body">
+       <div class="card-body">
+      <p>{{ "Issue: " }}{{ object.ticketDescription}}</p>
+      <p>{{ "time made: " }}{{ object.ticketTime }}</p>
+      <p>{{ "priority: " }}{{ form.priority }}</p>
+      <p>{{ "status: " }}{{ form.condition }}</p>
+      <p>{{ "Posted by: " }}{{ object.staffmember }}</p>
+      {% endif %}
     <input class="btn btn-success" type="submit" value="Add Comment">
+      </div>
   </form>
 {% endblock %}

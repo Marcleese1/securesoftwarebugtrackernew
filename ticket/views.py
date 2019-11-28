@@ -7,24 +7,32 @@ from ticket import models
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from users.models import Users
+from.models import Ticket
 from django.views.generic.edit import CreateView, UpdateView
-
+from django.contrib import messages
+from django.shortcuts import render_to_response,redirect, render
+from django.views.generic.edit import FormMixin, ModelFormMixin
 
 class dashView(ListView):
-        model = models.Ticket
-        template_name = 'dashboard.html'
+    model = models.Ticket
+    template_name = 'dashboard.html'
 
 
 class createTicketView(LoginRequiredMixin, CreateView):
-    model = models.Ticket
+    model = Ticket
     template_name = 'createTicket.html'
     fields = ('ticketName', 'ticketDescription', 'priority', 'role')
     success_url = reverse_lazy('dashboard')
 
 
 class EditTicketView(UpdateView, LoginRequiredMixin):
-    model = models.Ticket
-    template_name = 'editTicket.html'
-    fields = ['ticketName', 'ticketDescription', 'condition', 'priority', 'role']
-    success_url = reverse_lazy('dashboard')
+        model = Ticket
+        template_name = 'editTicket.html'
+        fields = ['ticketName', 'ticketDescription', 'condition', 'priority', 'role']
+        success_url = reverse_lazy('dashboard')
+    #else:
+        #model = Ticket
+        #template_name = 'dashboard.html'
+        #fields = ['ticketName', 'ticketDescription', 'condition', 'priority', 'role']
+
 
