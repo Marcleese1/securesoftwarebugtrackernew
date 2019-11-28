@@ -25,8 +25,9 @@ class createTicketForm(UserCreationForm):
         self.fields['ticketTime'].widget = widgets.AdminDateWidget()
 
 
-class EditTicketForms(forms.ModelForm):
+class EditTicketForms(forms.ModelForm, forms.Form):
     class Meta:
         model=Ticket
+        #description = forms.CharField(widget=forms.Textarea)
         fields = ['ticketName', 'ticketDescription', 'condition', 'priority']
 
