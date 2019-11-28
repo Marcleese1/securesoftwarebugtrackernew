@@ -1,25 +1,43 @@
 {% extends 'base.html' %}
 
 {% block title %}Edit Ticket{% endblock %}
-
+<!--Displays the view depending on who is logged in-->
 {% block content %}
   <h1>Package Details</h1>
+      {% if request.user == object.staffmember or user.is_Staff %}
   <form method="POST">
     {% csrf_token %}
-      {% if request.user == object.staffmember or user.is_Staff %}
     {{ form.as_p }}
      <input class="btn btn-success" type="submit" value="Edit ticket">
       {% else %}
           <span class="font-weight-bold">{{ "Title: " }}{{ object.ticketName }}</span>
-      <div class="card-body">
        <div class="card-body">
       <p>{{ "Issue: " }}{{ object.ticketDescription}}</p>
       <p>{{ "time made: " }}{{ object.ticketTime }}</p>
       <p>{{ "priority: " }}{{ object.priority }}</p>
       <p>{{ "status: " }}{{ object.condition }}</p>
       <p>{{ "Posted by: " }}{{ object.staffmember }}</p>
-      {% endif %}
-     <input class="btn btn-success" type="submit" value="Edit ticket">
-      </div>
-  </form>
-{% endblock %}
+     <input onclick="goBack()" class="btn btn-success" type="submit" value="dashboard">
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+          {% endif %}
+</div>
+     </form>
+
+    <hr>
+    <form method="POST">
+    <a class="btn btn-default" href="{% url 'add-comment' pk=ticket.pk %}">Add comment</a>
+{% for comment in comment.all %}
+    <div class="form-group">
+        <div class="date">{{ comment.timestamp }}</div>
+        <strong>{{ comment.user }}</strong>
+        <p>{{ comment.description | linebreaks}}</p>
+    </div>
+    {% empty %}
+    <p>No comments here yet :(</p>
+    {% endfor %}
+    </form>
+    {% endblock %}

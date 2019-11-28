@@ -6,7 +6,7 @@
 {% block title %}Tickets{% endblock %}
 
 {% block content %}
-    <h1>Packages</h1>
+    <h1>Tickets</h1>
   {% for post in object_list %}
       <div class="card">
        <a href="{% url 'editTicket' post.pk%}">
@@ -17,8 +17,7 @@
       <p>{{ "priority: " }}{{ post.priority }}</p>
       <p>{{ "status: " }}{{ post.condition }}</p>
       <p>{{ "Posted by: " }}{{ post.staffmember }}</p>
-      {% if request.user.is_authenticated %}
-      {% endif %}
+      <a href="{% url 'editTicket' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
       </div>
        </a>
     </div>

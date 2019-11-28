@@ -2,21 +2,23 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView, TemplateView
 from ticket import models
 from django.urls import reverse_lazy
 from.models import Ticket, Comment
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseForbidden
-'''
+from .forms import EditTicketForms, CommentForm
+from django.contrib import messages
+
 class OwnerProtectMixin(object):
     def dispatch(self, request, *args, **kwargs):
         objectUser = self.get_object()
         if objectUser.user != self.request.user:
             return HttpResponseForbidden()
-        return super(OwnerProtectMixin, self).dispatch(request, *args, **kwargs)'''
+        return super(OwnerProtectMixin, self).dispatch(request, *args, **kwargs)
 
 class dashView(ListView):
     model = models.Ticket
@@ -32,6 +34,8 @@ class createTicketView(LoginRequiredMixin, CreateView):
 
 class EditTicketView(UpdateView, LoginRequiredMixin):
         model = Ticket
+        post_form_class = EditTicketForms
+        comment_form_class = CommentForm
         template_name = 'editTicket.html'
         fields = ['ticketName', 'ticketDescription', 'condition', 'priority', 'role']
         success_url = reverse_lazy('dashboard')
@@ -40,6 +44,18 @@ class EditTicketView(UpdateView, LoginRequiredMixin):
         #template_name = 'dashboard.html'
         #fields = ['ticketName', 'ticketDescription', 'condition', 'priority', 'role']
 
+def CreateCommentView(request, pk):
+    ticketId = get_object_or_404(Ticket, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            Comment = form.save(commit=False)
+            Comment.ticketId = ticketId
+            Comment.save()
+            return redirect('editTicket', pk=ticketId.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'Createcomment.html', {'form': form})
 
 '''
 class CommentCreateView(CreateView):
@@ -56,7 +72,7 @@ class CommentCreateView(CreateView):
 class CommentUpdateView(OwnerProtectMixin, UpdateView):
 	model = Comment
 	fields = ['description']
-	template_name = ''
+	template_name = 'editTicket.html'
 
 @method_decorator(login_required, name='dispatch')
 class CommentDeleteView(OwnerProtectMixin, DeleteView):

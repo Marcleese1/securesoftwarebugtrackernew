@@ -1,0 +1,29 @@
+
+<!--This page is not used and is only
+ here to hold some HTML that was used for testing purposes-->
+
+<!--{% if request.user == comment.user %}
+	  		<a href="{% url 'edit-comment' comment.id %}">Edit</a>
+	  		<form method="post" action="{% url 'delete-comment' comment.id %}">
+	  			{% csrf_token %}
+	  			<button class="btn btn-danger" type="submit">Delete</button>
+	  		</form>
+	  	{% endif %}-->
+
+
+<!--
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+    <a class="btn btn-default" href="{% url 'add-comment' pk=ticket.pk %}">Add comment</a>
+{% for comment in comment.all %}
+    <div class="form-group">
+        <div class="date">{{ comment.timestamp }}</div>
+        <strong>{{ comment.user }}</strong>
+        <p>{{ comment.description | linebreaks}}</p>
+    </div>
+    {% empty %}
+    <p>No comments here yet :(</p>
+    {% endfor %}
+    </form>
+
