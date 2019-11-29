@@ -30,10 +30,10 @@ function goBack() {
 
         <hr>
      <form method="post">
-    <a class="btn btn-default" href="{% url 'add-comment' ticket.id %}">Add comment</a>
+    <a class="btn btn-default" href="{% url 'add-comment' ticket.pk %}">Add comment</a>
 {% for post in object.comment.all %}
     <div class="card-body">
-        <p>{{ "Test" }}{{ post.timestamp }}</p>
+        <p>{{ post.timestamp }}</p>
         <strong>{{ post.user }}</strong>
         <p>{{ post.description | linebreaks}}</p>
     </div>
