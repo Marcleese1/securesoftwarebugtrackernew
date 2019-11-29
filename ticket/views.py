@@ -56,12 +56,14 @@ def CreateCommentView(request, pk):
         if form.is_valid():
             Comment = form.save(commit=False)
             Comment.ticketId = post
+            Comment.user = request.user
             #form.cleaned_data('description')
             Comment.save()
             return redirect('viewComment', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'Createcomment.html', {'form': form})
+
 
 class viewComments(ListView):
     model = Comment
