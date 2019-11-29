@@ -17,7 +17,7 @@
       <p>{{ "priority: " }}{{ post.priority }}</p>
       <p>{{ "status: " }}{{ post.condition }}</p>
       <p>{{ "Posted by: " }}{{ post.staffmember }}</p>
-      <a href="{% url 'editTicket' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
+      <a href="{% url 'add-comment' pk=post.pk %}">Comments: {{ post.comment.count}}</a>
       </div>
        </a>
     </div>

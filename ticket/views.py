@@ -44,18 +44,24 @@ class EditTicketView(UpdateView, LoginRequiredMixin):
         #template_name = 'dashboard.html'
         #fields = ['ticketName', 'ticketDescription', 'condition', 'priority', 'role']
 
+
 def CreateCommentView(request, pk):
-    ticketId = get_object_or_404(Ticket, pk=pk)
+    post = get_object_or_404(Ticket, pk=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
             Comment = form.save(commit=False)
-            Comment.ticketId = ticketId
+            Comment.ticketId = post
+            #form.cleaned_data('description')
             Comment.save()
-            return redirect('editTicket', pk=ticketId.pk)
+            return redirect('viewComment', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'Createcomment.html', {'form': form})
+
+class viewComments(ListView):
+    model = Comment
+    template_name = 'editTicket.html'
 
 '''
 class CommentCreateView(CreateView):

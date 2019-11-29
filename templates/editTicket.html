@@ -17,27 +17,28 @@
       <p>{{ "priority: " }}{{ object.priority }}</p>
       <p>{{ "status: " }}{{ object.condition }}</p>
       <p>{{ "Posted by: " }}{{ object.staffmember }}</p>
-     <input onclick="goBack()" class="btn btn-success" type="submit" value="dashboard">
+     <a class="btn btn-default" href="{% url 'dashboard' %}">back to dashboard</a>
 <script>
 function goBack() {
   window.history.back();
 }
 </script>
+
           {% endif %}
 </div>
-     </form>
+</form>
 
-    <hr>
-    <form method="POST">
-    <a class="btn btn-default" href="{% url 'add-comment' pk=ticket.pk %}">Add comment</a>
-{% for comment in comment.all %}
-    <div class="form-group">
-        <div class="date">{{ comment.timestamp }}</div>
-        <strong>{{ comment.user }}</strong>
-        <p>{{ comment.description | linebreaks}}</p>
+        <hr>
+     <form method="post">
+    <a class="btn btn-default" href="{% url 'add-comment' ticket.id %}">Add comment</a>
+{% for post in object.comment.all %}
+    <div class="card-body">
+        <p>{{ "Test" }}{{ post.timestamp }}</p>
+        <strong>{{ post.user }}</strong>
+        <p>{{ post.description | linebreaks}}</p>
     </div>
     {% empty %}
     <p>No comments here yet :(</p>
     {% endfor %}
-    </form>
+</form>
     {% endblock %}

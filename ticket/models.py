@@ -40,8 +40,6 @@ class Ticket(models.Model):
     id = models.AutoField(primary_key=True, unique=True, auto_created=True)
     staffmember = models.ForeignKey('users.Users', verbose_name='Users',on_delete=models.CASCADE, default=True,
                                     related_name='ticket')
-    comment = models.ForeignKey('Comment', verbose_name='comments',on_delete=models.CASCADE, default=True,
-                                    related_name='comment')
     ticketId = models.UUIDField(default=uuid.uuid4, editable=False)
     ticketName = models.CharField(max_length=200)
     ticketDescription = models.TextField(max_length=10000)
@@ -54,9 +52,8 @@ class Ticket(models.Model):
 
 class Comment(models.Model):
     id = models.AutoField(primary_key=True, unique=True, auto_created=True)
-    ticketId = models.ForeignKey('Ticket', verbose_name='Ticket', on_delete=models.CASCADE, default=True,
-                                 related_name='ticket')
-    user = models.ForeignKey('users.Users',  verbose_name='Users', on_delete=models.CASCADE, default=True,
-                               related_name='comment')
+    IdTicket = models.ForeignKey('ticket.Ticket', verbose_name='Ticket', on_delete=models.CASCADE, related_name='comment', default=True)
+    user = models.ForeignKey('users.Users',  verbose_name='Users', on_delete=models.CASCADE,
+                               related_name='comments', default=True)
     timestamp = models.DateTimeField(default=timezone.now)
     description = models.CharField(max_length=1000)
