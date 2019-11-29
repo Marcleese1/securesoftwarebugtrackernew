@@ -31,6 +31,10 @@ class createTicketView(LoginRequiredMixin, CreateView):
     fields = ('ticketName', 'ticketDescription', 'priority', 'role')
     success_url = reverse_lazy('dashboard')
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(createTicketView, self).form_valid(form)
+
 
 class EditTicketView(UpdateView, LoginRequiredMixin):
         model = Ticket

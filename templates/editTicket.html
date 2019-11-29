@@ -4,7 +4,7 @@
 <!--Displays the view depending on who is logged in-->
 {% block content %}
   <h1>Package Details</h1>
-      {% if request.user == object.staffmember or user.is_Staff or ticket.priority is open or ticket.priority is resolved %}
+      {% if request.user == object.staffmember or user.is_Staff %}
   <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
@@ -16,7 +16,7 @@
       <p>{{ "time made: " }}{{ object.ticketTime }}</p>
       <p>{{ "priority: " }}{{ object.priority }}</p>
       <p>{{ "status: " }}{{ object.condition }}</p>
-      <p>{{ "Posted by: " }}{{ object.staffmember }}</p>
+      <p>{{ "Posted by: " }}{{ object.user }}</p>
      <a class="btn btn-default" href="{% url 'dashboard' %}">back to dashboard</a>
 <script>
 function goBack() {

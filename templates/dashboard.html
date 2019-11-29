@@ -7,17 +7,17 @@
 
 {% block content %}
     <h1>Tickets</h1>
-  {% for post in object_list %}
+  {% for post in ticket_list %}
       <div class="card">
-       <a href="{% url 'editTicket' post.pk%}">
+       <a href="{% url 'editTicket' post.pk %}">
      <span class="font-weight-bold">{{ "Title: " }}{{ post.ticketName }}</span>
       <div class="card-body">
       <p>{{ "Issue: " }}{{ post.ticketDescription }}</p>
       <p>{{ "time made: " }}{{ post.ticketTime }}</p>
       <p>{{ "priority: " }}{{ post.priority }}</p>
       <p>{{ "status: " }}{{ post.condition }}</p>
-      <p>{{ "Posted by: " }}{{ post.staffmember }}</p>
-      <a href="{% url 'add-comment' pk=post.pk %}">Comments: {{ post.comment.count}}</a>
+      <p>{{ "Posted by: " }}{{ post.user }}</p>
+      <a href="{% url 'editTicket' post.pk %}">Comments: {{ post.comment.count}}</a>
       </div>
        </a>
     </div>
