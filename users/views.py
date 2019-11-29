@@ -8,6 +8,7 @@ from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
+from.models import Users
 
 # Create your views here.
 def registerView(request):
@@ -28,6 +29,12 @@ def logoutView(request):
     logout(request)
     return redirect('login')
 
+def loginView(request, form):
+    login(request, form.get_user())
+    if Users.password_changed == False:
+        return redirect('dashboard')
+    else:
+        return redirect('changepassword')
 
 #allows the customer to change their password
 def change_password(request):

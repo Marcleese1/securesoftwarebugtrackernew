@@ -4,7 +4,7 @@
 <!--Displays the view depending on who is logged in-->
 {% block content %}
   <h1>Package Details</h1>
-      {% if request.user == object.staffmember or user.is_Staff %}
+      {% if request.user == object.staffmember or user.is_Staff or ticket.priority is open or ticket.priority is resolved %}
   <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}

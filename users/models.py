@@ -43,7 +43,7 @@ class Users(AbstractUser):
     id = models.AutoField(primary_key=True, unique=True, auto_created=True)
     username = models.CharField(blank=False, max_length=25, unique=True)
     email = models.EmailField(blank=False, unique=True)
-
+    password_changed= models.BooleanField(default=False)
     objects = Manager()
 
     def __str__(self):
