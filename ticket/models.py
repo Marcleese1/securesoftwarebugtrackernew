@@ -37,7 +37,7 @@ Roles = [
 
 # Create your models here.
 class Ticket(models.Model):
-    user = models.ForeignKey(Users, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey('users.Users', verbose_name='Users', on_delete=models.CASCADE, default=None)
     ticketId = models.UUIDField(default=uuid.uuid4, editable=False)
     ticketName = models.CharField(max_length=200)
     ticketDescription = models.TextField(max_length=10000)
